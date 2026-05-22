@@ -115,7 +115,7 @@ function ProductPage() {
               </ul>
             </div>
 
-            {produto.slug === "cesta-completa-caneca-personalizada" ? (
+            {(produto.slug === "cesta-completa-caneca-personalizada" || produto.slug === "box-love-polaroid-premium-quadro") ? (
               <a
                 href="#personalizar"
                 className="mt-6 w-full bg-primary text-primary-foreground font-bold uppercase tracking-wide rounded-full py-4 hover:bg-primary/90 transition-colors shadow-lg text-center"
