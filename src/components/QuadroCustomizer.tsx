@@ -315,7 +315,7 @@ export function QuadroCustomizer() {
                     setSongQuery(e.target.value);
                   }}
                   placeholder="Digite o nome da música ou artista"
-                  className="w-full text-sm border border-border rounded-md pl-9 pr-9 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  className={`w-full text-sm border rounded-md pl-9 pr-9 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "musica" && !selectedSong ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
                 />
                 {selectedSong && (
                   <button
