@@ -1,6 +1,6 @@
 import produto1 from "@/assets/cesta-premium-caneca-nova.webp";
 import produto3 from "@/assets/cesta-luxo-polaroid-quadro.webp";
-import produto4 from "@/assets/produto-4.png";
+import produto4 from "@/assets/cesta-urso-polaroid.webp";
 
 export type Produto = {
   slug: string;

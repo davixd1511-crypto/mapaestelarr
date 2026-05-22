@@ -5,6 +5,7 @@ import { getProduto, produtos, type Produto } from "@/data/produtos";
 import { BrindeModal } from "@/components/BrindeModal";
 import { Customizer } from "@/components/Customizer";
 import { QuadroCustomizer } from "@/components/QuadroCustomizer";
+import { PolaroidCustomizer } from "@/components/PolaroidCustomizer";
 import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/products/$slug")({
@@ -115,7 +116,7 @@ function ProductPage() {
               </ul>
             </div>
 
-            {(produto.slug === "cesta-completa-caneca-personalizada" || produto.slug === "box-love-polaroid-premium-quadro") ? (
+            {(produto.slug === "cesta-completa-caneca-personalizada" || produto.slug === "box-love-polaroid-premium-quadro" || produto.slug === "cesta-completa-polaroid-urso-de-pelucia") ? (
               <a
                 href="#personalizar"
                 className="mt-6 w-full bg-primary text-primary-foreground font-bold uppercase tracking-wide rounded-full py-4 hover:bg-primary/90 transition-colors shadow-lg text-center"
@@ -151,6 +152,12 @@ function ProductPage() {
         {produto.slug === "box-love-polaroid-premium-quadro" && (
           <div id="personalizar">
             <QuadroCustomizer />
+          </div>
+        )}
+
+        {produto.slug === "cesta-completa-polaroid-urso-de-pelucia" && (
+          <div id="personalizar">
+            <PolaroidCustomizer preco={produto.por} />
           </div>
         )}
 
