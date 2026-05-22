@@ -36,9 +36,9 @@ export const produtos: Produto[] = [
     slug: "box-love-polaroid-premium-quadro",
     img: produto3,
     nome: "Cesta Luxo (Polaroid) + Quadro Grátis",
-    de: "R$ 309,88",
-    por: "R$ 299,90",
-    parcelas: "12x de R$ 28,69",
+    de: "R$ 129,90",
+    por: "R$ 98,32",
+    parcelas: "12x de R$ 8,20",
     descricao:
       "A versão luxo do nosso Box Love: caixa maior, mais chocolates, polaroids e um quadro premium personalizado de cortesia. Para um amor que merece o melhor.",
     inclui: [
