@@ -19,7 +19,7 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-caneca-personalizada",
     img: produto1,
     nome: "Cesta Premium + Caneca Personalizada",
-    de: "R$ 159,90",
+    de: "R$ 289,00",
     por: "R$ 123,54",
     parcelas: "12x de R$ 10,30",
     descricao:
@@ -36,7 +36,7 @@ export const produtos: Produto[] = [
     slug: "box-love-polaroid-premium-quadro",
     img: produto3,
     nome: "Cesta Luxo (Polaroid) + Quadro Grátis",
-    de: "R$ 129,90",
+    de: "R$ 289,00",
     por: "R$ 98,32",
     parcelas: "12x de R$ 8,20",
     descricao:
@@ -53,7 +53,7 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-polaroid-urso-de-pelucia",
     img: produto4,
     nome: "Cesta Premium (Polaroid) + Urso de Pelúcia",
-    de: "R$ 139,90",
+    de: "R$ 289,00",
     por: "R$ 100,15",
     parcelas: "12x de R$ 8,35",
     descricao:
