@@ -118,11 +118,33 @@ export function Customizer() {
   const fotosPreenchidas = slotsAtuais.filter((s) => s.url).length;
   const completo = fotosPreenchidas === template.slots;
 
+  const fotosRef = useRef<HTMLDivElement>(null);
+  const canecaRef = useRef<HTMLDivElement>(null);
+  const mensagemRef = useRef<HTMLDivElement>(null);
+  const [errorField, setErrorField] = useState<"fotos" | "caneca" | "mensagem" | null>(null);
+
+  const focusError = (
+    field: "fotos" | "caneca" | "mensagem",
+    ref: React.RefObject<HTMLDivElement | null>,
+    msg: string,
+  ) => {
+    setErrorField(field);
+    toast.error(msg);
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => setErrorField((f) => (f === field ? null : f)), 4000);
+  };
+
   const handleAdicionar = () => {
     if (!completo) {
-      alert(`Envie todas as ${template.slots} fotos para continuar.`);
-      return;
+      return focusError("fotos", fotosRef, `Envie todas as ${template.slots} fotos da polaroid.`);
     }
+    if (canecaFotos.some((u) => !u)) {
+      return focusError("caneca", canecaRef, "Envie as 2 fotos da caneca personalizada.");
+    }
+    if (!mensagem.trim()) {
+      return focusError("mensagem", mensagemRef, "Escreva a mensagem do cartão.");
+    }
+    setErrorField(null);
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 4000);
   };
