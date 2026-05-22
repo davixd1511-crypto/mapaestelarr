@@ -53,9 +53,9 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-polaroid-urso-de-pelucia",
     img: produto4,
     nome: "Cesta Premium (Polaroid) + Urso de Pelúcia",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
+    de: "R$ 139,90",
+    por: "R$ 100,15",
+    parcelas: "12x de R$ 8,35",
     descricao:
       "Cesta completa com fotos polaroid e um lindo urso de pelúcia segurando um coração 'Love You'. O presente perfeito para arrancar sorrisos e lágrimas de alegria.",
     inclui: [
