@@ -321,7 +321,7 @@ export function Customizer() {
               {canecaFotos.map((url, i) => (
                 <label
                   key={i}
-                  className="relative aspect-square rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors"
+                  className={`relative aspect-square rounded-lg bg-muted border border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${!url && errorField === "caneca" ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
                 >
                   {url ? (
                     <img src={url} alt={`Foto caneca ${i + 1}`} className="w-full h-full object-cover" />
