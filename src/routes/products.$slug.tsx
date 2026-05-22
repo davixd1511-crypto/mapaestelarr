@@ -148,6 +148,12 @@ function ProductPage() {
           </div>
         )}
 
+        {produto.slug === "box-love-polaroid-premium-quadro" && (
+          <div id="personalizar">
+            <QuadroCustomizer />
+          </div>
+        )}
+
 
 
         <section className="mt-16">
