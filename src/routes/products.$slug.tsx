@@ -55,7 +55,7 @@ function ProductPage() {
   }, [produto.slug]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <div className="bg-foreground text-background text-center text-xs sm:text-sm py-2 px-4">
         FRETE GRÁTIS para todo o Brasil em compras acima de R$ 199 ✦ Parcele em até 12x
       </div>
