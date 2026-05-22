@@ -114,12 +114,21 @@ function ProductPage() {
               </ul>
             </div>
 
-            <button
-              onClick={() => setOpenModal(true)}
-              className="mt-6 w-full bg-primary text-primary-foreground font-bold uppercase tracking-wide rounded-full py-4 hover:bg-primary/90 transition-colors shadow-lg"
-            >
-              Personalizar e Comprar
-            </button>
+            {produto.slug === "cesta-completa-caneca-personalizada" ? (
+              <a
+                href="#personalizar"
+                className="mt-6 w-full bg-primary text-primary-foreground font-bold uppercase tracking-wide rounded-full py-4 hover:bg-primary/90 transition-colors shadow-lg text-center"
+              >
+                Personalizar agora
+              </a>
+            ) : (
+              <button
+                onClick={() => setOpenModal(true)}
+                className="mt-6 w-full bg-primary text-primary-foreground font-bold uppercase tracking-wide rounded-full py-4 hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                Personalizar e Comprar
+              </button>
+            )}
 
             <div className="mt-5 grid grid-cols-2 gap-3 text-xs">
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -131,6 +140,14 @@ function ProductPage() {
             </div>
           </div>
         </div>
+
+        {produto.slug === "cesta-completa-caneca-personalizada" && (
+          <div id="personalizar">
+            <Customizer />
+          </div>
+        )}
+
+
 
         <section className="mt-16">
           <h2 className="text-xl md:text-2xl font-bold text-center mb-6">Você também vai amar</h2>
