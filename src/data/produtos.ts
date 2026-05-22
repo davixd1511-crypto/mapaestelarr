@@ -19,9 +19,9 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-caneca-personalizada",
     img: produto1,
     nome: "Cesta Premium + Caneca Personalizada",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
+    de: "R$ 159,90",
+    por: "R$ 123,54",
+    parcelas: "12x de R$ 10,30",
     descricao:
       "A combinação perfeita para surpreender quem você ama: uma cesta recheada de doces e uma caneca personalizada com a foto e o nome do casal. Cada detalhe pensado para emocionar.",
     inclui: [
@@ -36,9 +36,9 @@ export const produtos: Produto[] = [
     slug: "box-love-polaroid-premium-quadro",
     img: produto3,
     nome: "Cesta Luxo (Polaroid) + Quadro Grátis",
-    de: "R$ 309,88",
-    por: "R$ 299,90",
-    parcelas: "12x de R$ 28,69",
+    de: "R$ 129,90",
+    por: "R$ 98,32",
+    parcelas: "12x de R$ 8,20",
     descricao:
       "A versão luxo do nosso Box Love: caixa maior, mais chocolates, polaroids e um quadro premium personalizado de cortesia. Para um amor que merece o melhor.",
     inclui: [
@@ -53,9 +53,9 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-polaroid-urso-de-pelucia",
     img: produto4,
     nome: "Cesta Premium (Polaroid) + Urso de Pelúcia",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
+    de: "R$ 139,90",
+    por: "R$ 100,15",
+    parcelas: "12x de R$ 8,35",
     descricao:
       "Cesta completa com fotos polaroid e um lindo urso de pelúcia segurando um coração 'Love You'. O presente perfeito para arrancar sorrisos e lágrimas de alegria.",
     inclui: [
