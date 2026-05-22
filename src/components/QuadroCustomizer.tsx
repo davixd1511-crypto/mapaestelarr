@@ -142,13 +142,41 @@ export function QuadroCustomizer() {
   }, [songQuery, selectedSong]);
 
   const fotosPreenchidas = slotsAtuais.filter((s) => s.url).length;
-  const completo = fotosPreenchidas === template.slots && !!quadroFoto && !!selectedSong && quadroNomes.trim().length > 0;
+
+  const fotosRef = useRef<HTMLDivElement>(null);
+  const quadroRef = useRef<HTMLDivElement>(null);
+  const mensagemRef = useRef<HTMLDivElement>(null);
+  type ErrField = "fotos" | "musica" | "nomes" | "quadroFoto" | "mensagem";
+  const [errorField, setErrorField] = useState<ErrField | null>(null);
+
+  const focusError = (
+    field: ErrField,
+    ref: React.RefObject<HTMLDivElement | null>,
+    msg: string,
+  ) => {
+    setErrorField(field);
+    toast.error(msg);
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => setErrorField((f) => (f === field ? null : f)), 4000);
+  };
 
   const handleAdicionar = () => {
-    if (!completo) {
-      alert("Complete todas as fotos da polaroid, a foto do quadro, os nomes e a música escolhida.");
-      return;
+    if (fotosPreenchidas !== template.slots) {
+      return focusError("fotos", fotosRef, `Envie todas as ${template.slots} fotos da polaroid.`);
     }
+    if (!selectedSong) {
+      return focusError("musica", quadroRef, "Selecione a música do quadro.");
+    }
+    if (!quadroNomes.trim()) {
+      return focusError("nomes", quadroRef, "Digite os nomes do casal.");
+    }
+    if (!quadroFoto) {
+      return focusError("quadroFoto", quadroRef, "Envie a imagem do quadro.");
+    }
+    if (!mensagem.trim()) {
+      return focusError("mensagem", mensagemRef, "Escreva a mensagem do cartão.");
+    }
+    setErrorField(null);
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 4000);
   };
