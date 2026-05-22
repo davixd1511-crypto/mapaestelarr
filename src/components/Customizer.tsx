@@ -88,6 +88,13 @@ export function Customizer() {
   const [canecaNome, setCanecaNome] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [adicionado, setAdicionado] = useState(false);
+  const [canecaFotos, setCanecaFotos] = useState<(string | null)[]>([null, null]);
+
+  const handleCanecaFile = (idx: number, file: File | null) => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setCanecaFotos((prev) => prev.map((u, i) => (i === idx ? url : u)));
+  };
 
   const slotsAtuais = slots[templateId];
 
@@ -283,6 +290,33 @@ export function Customizer() {
               placeholder="Ex: João & Maria"
               className="mt-1 w-full text-sm border border-border rounded-md px-3 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
+
+            <label className="block mt-4 text-xs text-muted-foreground">
+              Fotos da polaroid da caneca (2 fotos)
+            </label>
+            <div className="mt-2 grid grid-cols-2 gap-3">
+              {canecaFotos.map((url, i) => (
+                <label
+                  key={i}
+                  className="relative aspect-square rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors"
+                >
+                  {url ? (
+                    <img src={url} alt={`Foto caneca ${i + 1}`} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="flex flex-col items-center text-muted-foreground">
+                      <Upload className="h-5 w-5" />
+                      <span className="text-[10px] mt-1">Foto {i + 1}</span>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    onChange={(e) => handleCanecaFile(i, e.target.files?.[0] ?? null)}
+                  />
+                </label>
+              ))}
+            </div>
           </div>
         </div>
       </div>
