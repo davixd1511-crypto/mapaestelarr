@@ -294,7 +294,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 4: QUADRO Spotify-style */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={quadroRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">4</span>
           Personalize seu quadro
