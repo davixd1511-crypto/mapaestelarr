@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Camera, Check, Music, Search, Upload, X } from "lucide-react";
+import { toast } from "sonner";
 import template6 from "@/assets/template-6polaroids.webp";
 import templateCasar from "@/assets/template-casar.webp";
 import templateNamorar from "@/assets/template-namorar.webp";
@@ -141,13 +142,41 @@ export function QuadroCustomizer() {
   }, [songQuery, selectedSong]);
 
   const fotosPreenchidas = slotsAtuais.filter((s) => s.url).length;
-  const completo = fotosPreenchidas === template.slots && !!quadroFoto && !!selectedSong && quadroNomes.trim().length > 0;
+
+  const fotosRef = useRef<HTMLDivElement>(null);
+  const quadroRef = useRef<HTMLDivElement>(null);
+  const mensagemRef = useRef<HTMLDivElement>(null);
+  type ErrField = "fotos" | "musica" | "nomes" | "quadroFoto" | "mensagem";
+  const [errorField, setErrorField] = useState<ErrField | null>(null);
+
+  const focusError = (
+    field: ErrField,
+    ref: React.RefObject<HTMLDivElement | null>,
+    msg: string,
+  ) => {
+    setErrorField(field);
+    toast.error(msg);
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => setErrorField((f) => (f === field ? null : f)), 4000);
+  };
 
   const handleAdicionar = () => {
-    if (!completo) {
-      alert("Complete todas as fotos da polaroid, a foto do quadro, os nomes e a música escolhida.");
-      return;
+    if (fotosPreenchidas !== template.slots) {
+      return focusError("fotos", fotosRef, `Envie todas as ${template.slots} fotos da polaroid.`);
     }
+    if (!selectedSong) {
+      return focusError("musica", quadroRef, "Selecione a música do quadro.");
+    }
+    if (!quadroNomes.trim()) {
+      return focusError("nomes", quadroRef, "Digite os nomes do casal.");
+    }
+    if (!quadroFoto) {
+      return focusError("quadroFoto", quadroRef, "Envie a imagem do quadro.");
+    }
+    if (!mensagem.trim()) {
+      return focusError("mensagem", mensagemRef, "Escreva a mensagem do cartão.");
+    }
+    setErrorField(null);
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 4000);
   };
@@ -198,7 +227,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 2: Fotos polaroids */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={fotosRef}>
         <h3 className="font-semibold mb-1">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">2</span>
           Envie suas fotos e legendas
@@ -210,7 +239,7 @@ export function QuadroCustomizer() {
           {slotsAtuais.map((slot, i) => (
             <div key={i} className="border border-border rounded-xl p-3 bg-card">
               <div className="flex gap-3">
-                <label className="relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors">
+                <label className={`relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${!slot.url && errorField === "fotos" ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}>
                   {slot.url ? (
                     <img src={slot.url} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -265,7 +294,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 4: QUADRO Spotify-style */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={quadroRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">4</span>
           Personalize seu quadro
@@ -286,7 +315,7 @@ export function QuadroCustomizer() {
                     setSongQuery(e.target.value);
                   }}
                   placeholder="Digite o nome da música ou artista"
-                  className="w-full text-sm border border-border rounded-md pl-9 pr-9 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  className={`w-full text-sm border rounded-md pl-9 pr-9 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "musica" && !selectedSong ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
                 />
                 {selectedSong && (
                   <button
@@ -334,13 +363,13 @@ export function QuadroCustomizer() {
                 value={quadroNomes}
                 onChange={(e) => setQuadroNomes(e.target.value)}
                 placeholder="Ex: Melina e Lucas"
-                className="w-full text-sm border border-border rounded-md px-3 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className={`w-full text-sm border rounded-md px-3 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "nomes" && !quadroNomes.trim() ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
               />
             </div>
 
             <div>
               <label className="block text-xs text-muted-foreground mb-1">Envie a imagem do quadro</label>
-              <label className="relative h-40 w-full rounded-lg bg-muted border-2 border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors">
+              <label className={`relative h-40 w-full rounded-lg bg-muted border-2 border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${errorField === "quadroFoto" && !quadroFoto ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}>
                 {quadroFoto ? (
                   <img src={quadroFoto} alt="Foto do quadro" className="w-full h-full object-cover" />
                 ) : (
@@ -407,7 +436,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 5: Mensagem */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={mensagemRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">5</span>
           Mensagem do cartão
@@ -418,7 +447,7 @@ export function QuadroCustomizer() {
           value={mensagem}
           onChange={(e) => setMensagem(e.target.value)}
           placeholder="Escreva aqui a mensagem que vai dentro da caixa..."
-          className="w-full text-sm border border-border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className={`w-full text-sm border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "mensagem" && !mensagem.trim() ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
         />
         <p className="text-xs text-muted-foreground text-right mt-1">{mensagem.length}/300</p>
       </div>

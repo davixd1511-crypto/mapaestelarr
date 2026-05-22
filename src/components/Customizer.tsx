@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Camera, Check, Upload } from "lucide-react";
+import { toast } from "sonner";
 import template6 from "@/assets/template-6polaroids.webp";
 import templateCasar from "@/assets/template-casar.webp";
 import templateNamorar from "@/assets/template-namorar.webp";
@@ -117,11 +118,33 @@ export function Customizer() {
   const fotosPreenchidas = slotsAtuais.filter((s) => s.url).length;
   const completo = fotosPreenchidas === template.slots;
 
+  const fotosRef = useRef<HTMLDivElement>(null);
+  const canecaRef = useRef<HTMLDivElement>(null);
+  const mensagemRef = useRef<HTMLDivElement>(null);
+  const [errorField, setErrorField] = useState<"fotos" | "caneca" | "mensagem" | null>(null);
+
+  const focusError = (
+    field: "fotos" | "caneca" | "mensagem",
+    ref: React.RefObject<HTMLDivElement | null>,
+    msg: string,
+  ) => {
+    setErrorField(field);
+    toast.error(msg);
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => setErrorField((f) => (f === field ? null : f)), 4000);
+  };
+
   const handleAdicionar = () => {
     if (!completo) {
-      alert(`Envie todas as ${template.slots} fotos para continuar.`);
-      return;
+      return focusError("fotos", fotosRef, `Envie todas as ${template.slots} fotos da polaroid.`);
     }
+    if (canecaFotos.some((u) => !u)) {
+      return focusError("caneca", canecaRef, "Envie as 2 fotos da caneca personalizada.");
+    }
+    if (!mensagem.trim()) {
+      return focusError("mensagem", mensagemRef, "Escreva a mensagem do cartão.");
+    }
+    setErrorField(null);
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 4000);
   };
@@ -178,7 +201,7 @@ export function Customizer() {
       </div>
 
       {/* PASSO 2: Fotos e legendas */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={fotosRef}>
         <h3 className="font-semibold mb-1">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">
             2
@@ -193,7 +216,7 @@ export function Customizer() {
           {slotsAtuais.map((slot, i) => (
             <div key={i} className="border border-border rounded-xl p-3 bg-card">
               <div className="flex gap-3">
-                <label className="relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors">
+                <label className={`relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${!slot.url && errorField === "fotos" ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}>
                   {slot.url ? (
                     <img src={slot.url} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -259,7 +282,7 @@ export function Customizer() {
       </div>
 
       {/* PASSO 4: Caneca */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={canecaRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">
             4
@@ -298,7 +321,7 @@ export function Customizer() {
               {canecaFotos.map((url, i) => (
                 <label
                   key={i}
-                  className="relative aspect-square rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors"
+                  className={`relative aspect-square rounded-lg bg-muted border border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${!url && errorField === "caneca" ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
                 >
                   {url ? (
                     <img src={url} alt={`Foto caneca ${i + 1}`} className="w-full h-full object-cover" />
@@ -322,7 +345,7 @@ export function Customizer() {
       </div>
 
       {/* PASSO 5: Mensagem do cartão */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={mensagemRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">
             5
@@ -335,7 +358,7 @@ export function Customizer() {
           value={mensagem}
           onChange={(e) => setMensagem(e.target.value)}
           placeholder="Escreva aqui a mensagem que vai dentro da caixa..."
-          className="w-full text-sm border border-border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className={`w-full text-sm border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "mensagem" && !mensagem.trim() ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
         />
         <p className="text-xs text-muted-foreground text-right mt-1">{mensagem.length}/300</p>
       </div>
