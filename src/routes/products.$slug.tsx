@@ -4,6 +4,7 @@ import { Check, ChevronLeft, ShieldCheck, Star, Truck } from "lucide-react";
 import { getProduto, produtos, type Produto } from "@/data/produtos";
 import { BrindeModal } from "@/components/BrindeModal";
 import { Customizer } from "@/components/Customizer";
+import { QuadroCustomizer } from "@/components/QuadroCustomizer";
 import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/products/$slug")({
