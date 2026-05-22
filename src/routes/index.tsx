@@ -1,14 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ShoppingCart, Search, Menu, Star, Truck, ShieldCheck, CreditCard } from "lucide-react";
 import logo from "@/assets/logo.png";
 import banner1 from "@/assets/banner-1.png";
 import banner2 from "@/assets/banner-2.png";
 import banner3 from "@/assets/banner-3.png";
-import produto1 from "@/assets/produto-1.png";
-import produto2 from "@/assets/produto-2.png";
-import produto3 from "@/assets/produto-3.png";
-import produto4 from "@/assets/produto-4.png";
+import { produtos } from "@/data/produtos";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,36 +23,6 @@ export const Route = createFileRoute("/")({
 
 const banners = [banner1, banner2, banner3];
 
-const produtos = [
-  {
-    img: produto1,
-    nome: "Cesta Premium + Caneca Personalizada",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
-  },
-  {
-    img: produto2,
-    nome: "Cesta Completa (Polaroid) + Quadro Grátis",
-    de: "R$ 299,88",
-    por: "R$ 259,90",
-    parcelas: "12x de R$ 24,86",
-  },
-  {
-    img: produto3,
-    nome: "Cesta Luxo (Polaroid) + Quadro Grátis",
-    de: "R$ 309,88",
-    por: "R$ 299,90",
-    parcelas: "12x de R$ 28,69",
-  },
-  {
-    img: produto4,
-    nome: "Cesta Premium (Polaroid) + Urso de Pelúcia",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
-  },
-];
 
 function Index() {
   const [slide, setSlide] = useState(0);
@@ -188,9 +155,13 @@ function Index() {
                 <div className="text-xs text-muted-foreground line-through">{p.de}</div>
                 <div className="text-lg md:text-xl font-bold text-success">{p.por}</div>
                 <div className="text-xs text-muted-foreground mb-4">ou em {p.parcelas}</div>
-                <button className="mt-auto bg-foreground text-background font-semibold rounded-full py-3 px-4 text-sm hover:bg-primary transition-colors">
+                <Link
+                  to="/products/$slug"
+                  params={{ slug: p.slug }}
+                  className="mt-auto bg-foreground text-background font-semibold rounded-full py-3 px-4 text-sm hover:bg-primary transition-colors text-center"
+                >
                   Personalizar
-                </button>
+                </Link>
               </div>
             </article>
           ))}
