@@ -1,5 +1,5 @@
 import produto1 from "@/assets/cesta-premium-caneca-nova.webp";
-import produto2 from "@/assets/produto-2.png";
+
 import produto3 from "@/assets/produto-3.png";
 import produto4 from "@/assets/produto-4.png";
 
