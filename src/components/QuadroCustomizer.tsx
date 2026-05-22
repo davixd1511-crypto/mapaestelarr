@@ -227,7 +227,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 2: Fotos polaroids */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={fotosRef}>
         <h3 className="font-semibold mb-1">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">2</span>
           Envie suas fotos e legendas
@@ -239,7 +239,7 @@ export function QuadroCustomizer() {
           {slotsAtuais.map((slot, i) => (
             <div key={i} className="border border-border rounded-xl p-3 bg-card">
               <div className="flex gap-3">
-                <label className="relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors">
+                <label className={`relative h-20 w-20 shrink-0 rounded-lg bg-muted border border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${!slot.url && errorField === "fotos" ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}>
                   {slot.url ? (
                     <img src={slot.url} alt="" className="w-full h-full object-cover" />
                   ) : (
