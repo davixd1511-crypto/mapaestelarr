@@ -19,9 +19,9 @@ export const produtos: Produto[] = [
     slug: "cesta-completa-caneca-personalizada",
     img: produto1,
     nome: "Cesta Premium + Caneca Personalizada",
-    de: "R$ 309,88",
-    por: "R$ 289,90",
-    parcelas: "12x de R$ 27,73",
+    de: "R$ 159,90",
+    por: "R$ 123,54",
+    parcelas: "12x de R$ 10,30",
     descricao:
       "A combinação perfeita para surpreender quem você ama: uma cesta recheada de doces e uma caneca personalizada com a foto e o nome do casal. Cada detalhe pensado para emocionar.",
     inclui: [
