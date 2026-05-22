@@ -282,7 +282,7 @@ export function Customizer() {
       </div>
 
       {/* PASSO 4: Caneca */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={canecaRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">
             4
