@@ -369,7 +369,7 @@ export function QuadroCustomizer() {
 
             <div>
               <label className="block text-xs text-muted-foreground mb-1">Envie a imagem do quadro</label>
-              <label className="relative h-40 w-full rounded-lg bg-muted border-2 border-dashed border-border flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors">
+              <label className={`relative h-40 w-full rounded-lg bg-muted border-2 border-dashed flex items-center justify-center cursor-pointer overflow-hidden hover:border-primary transition-colors ${errorField === "quadroFoto" && !quadroFoto ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}>
                 {quadroFoto ? (
                   <img src={quadroFoto} alt="Foto do quadro" className="w-full h-full object-cover" />
                 ) : (
