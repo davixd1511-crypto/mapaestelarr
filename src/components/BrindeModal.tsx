@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import portaJoias from "@/assets/porta-joias.png";
 
 function formatTime(date: Date) {
   return date.toLocaleTimeString("pt-BR", {
@@ -63,8 +64,8 @@ export function BrindeModal({ onClose }: { onClose: () => void }) {
           </p>
 
           <div className="mt-5 flex items-center gap-4 bg-muted/50 border border-border rounded-2xl p-3 text-left">
-            <div className="h-16 w-16 shrink-0 rounded-xl bg-background border border-border flex items-center justify-center text-2xl">
-              🎁
+            <div className="h-16 w-16 shrink-0 rounded-xl overflow-hidden bg-background border border-border">
+              <img src={portaJoias} alt="Porta Jóias em MDF" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-sm">Porta Jóias em MDF</div>
