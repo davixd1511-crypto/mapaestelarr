@@ -436,7 +436,7 @@ export function QuadroCustomizer() {
       </div>
 
       {/* PASSO 5: Mensagem */}
-      <div className="mb-10">
+      <div className="mb-10 scroll-mt-24" ref={mensagemRef}>
         <h3 className="font-semibold mb-3">
           <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-primary-foreground text-xs mr-2">5</span>
           Mensagem do cartão
@@ -447,7 +447,7 @@ export function QuadroCustomizer() {
           value={mensagem}
           onChange={(e) => setMensagem(e.target.value)}
           placeholder="Escreva aqui a mensagem que vai dentro da caixa..."
-          className="w-full text-sm border border-border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className={`w-full text-sm border rounded-xl px-3 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 ${errorField === "mensagem" && !mensagem.trim() ? "border-destructive ring-2 ring-destructive/30" : "border-border"}`}
         />
         <p className="text-xs text-muted-foreground text-right mt-1">{mensagem.length}/300</p>
       </div>
