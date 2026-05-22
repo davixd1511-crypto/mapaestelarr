@@ -155,9 +155,13 @@ function Index() {
                 <div className="text-xs text-muted-foreground line-through">{p.de}</div>
                 <div className="text-lg md:text-xl font-bold text-success">{p.por}</div>
                 <div className="text-xs text-muted-foreground mb-4">ou em {p.parcelas}</div>
-                <button className="mt-auto bg-foreground text-background font-semibold rounded-full py-3 px-4 text-sm hover:bg-primary transition-colors">
+                <Link
+                  to="/products/$slug"
+                  params={{ slug: p.slug }}
+                  className="mt-auto bg-foreground text-background font-semibold rounded-full py-3 px-4 text-sm hover:bg-primary transition-colors text-center"
+                >
                   Personalizar
-                </button>
+                </Link>
               </div>
             </article>
           ))}
