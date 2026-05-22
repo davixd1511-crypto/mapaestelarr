@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Camera, Check, Upload } from "lucide-react";
+import { toast } from "sonner";
 import template6 from "@/assets/template-6polaroids.webp";
 import templateCasar from "@/assets/template-casar.webp";
 import templateNamorar from "@/assets/template-namorar.webp";
