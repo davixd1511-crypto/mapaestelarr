@@ -72,7 +72,7 @@ function ProductPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           <div className="bg-muted rounded-2xl overflow-hidden aspect-square">
             <img src={produto.img} alt={produto.nome} className="w-full h-full object-cover" />
