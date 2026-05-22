@@ -88,6 +88,13 @@ export function Customizer() {
   const [canecaNome, setCanecaNome] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [adicionado, setAdicionado] = useState(false);
+  const [canecaFotos, setCanecaFotos] = useState<(string | null)[]>([null, null]);
+
+  const handleCanecaFile = (idx: number, file: File | null) => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setCanecaFotos((prev) => prev.map((u, i) => (i === idx ? url : u)));
+  };
 
   const slotsAtuais = slots[templateId];
 
