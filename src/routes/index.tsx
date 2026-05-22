@@ -104,7 +104,7 @@ function Index() {
       <section className="border-b border-border">
         <div className="container mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[
-            { icon: Truck, t: "Frete Grátis", s: "Acima de R$ 199" },
+            { icon: Truck, t: "Frete Grátis", s: "Para todo o Brasil" },
             { icon: CreditCard, t: "Até 12x", s: "Sem juros no cartão" },
             { icon: ShieldCheck, t: "Compra Segura", s: "Site protegido" },
             { icon: Star, t: "+10 mil clientes", s: "Avaliação 5 estrelas" },
