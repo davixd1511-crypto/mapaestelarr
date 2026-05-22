@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Check, ChevronLeft, ShieldCheck, Star, Truck } from "lucide-react";
-import { getProduto, produtos } from "@/data/produtos";
+import { getProduto, produtos, type Produto } from "@/data/produtos";
 import { BrindeModal } from "@/components/BrindeModal";
 import logo from "@/assets/logo.png";
 
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductPage() {
-  const produto = Route.useLoaderData();
+  const produto = Route.useLoaderData() as Produto;
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
