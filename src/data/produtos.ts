@@ -33,23 +33,6 @@ export const produtos: Produto[] = [
     ],
   },
   {
-    slug: "box-love-polaroid-quadro-a5",
-    img: produto2,
-    nome: "Cesta Completa (Polaroid) + Quadro Grátis",
-    de: "R$ 299,88",
-    por: "R$ 259,90",
-    parcelas: "12x de R$ 24,86",
-    descricao:
-      "Box Love com fotos polaroid e um quadro A5 grátis para deixar a surpresa ainda mais especial. Um presente completo para celebrar quem você ama.",
-    inclui: [
-      "1 Caixa de madeira MDF com iluminação LED",
-      "6 fotos polaroid personalizadas",
-      "1 Quadro A5 personalizado (BRINDE)",
-      "Mix premium de chocolates",
-      "Cartão personalizado com mensagem",
-    ],
-  },
-  {
     slug: "box-love-polaroid-premium-quadro",
     img: produto3,
     nome: "Cesta Luxo (Polaroid) + Quadro Grátis",
