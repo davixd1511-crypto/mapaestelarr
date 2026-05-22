@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Check, ChevronLeft, ShieldCheck, Star, Truck } from "lucide-react";
 import { getProduto, produtos, type Produto } from "@/data/produtos";
 import { BrindeModal } from "@/components/BrindeModal";
+import { Customizer } from "@/components/Customizer";
 import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/products/$slug")({
